@@ -63,64 +63,48 @@ int commit_parse(const void *data, size_t len, Commit *commit_out) {
     if (!last_space) return -1;
     ts = (uint64_t)strtoull(last_space + 1, NULL, 10);
     *last_space = '\0';
-    snprintf(commit_out->author, sizeof(commit_out->author), "%s", author_buf);
-    commit_out->timestamp = ts;
-    p = strchr(p, '\n') + 1;  // skip author line
-    p = strchr(p, '\n') + 1;  // skip committer line
-    p = strchr(p, '\n') + 1;  // skip blank line
 
-    snprintf(commit_out->message, sizeof(commit_out->message), "%s", p);
-    return 0;
-}
+g
+g
 
-// Serialize a Commit struct to the text format.
-// Caller must free(*data_out).
-int commit_serialize(const Commit *commit, void **data_out, size_t *len_out) {
-    char tree_hex[HASH_HEX_SIZE + 1];
-    char parent_hex[HASH_HEX_SIZE + 1];
-    hash_to_hex(&commit->tree, tree_hex);
+g
+g
+g
 
-    char buf[8192];
-    int n = 0;
-    n += snprintf(buf + n, sizeof(buf) - n, "tree %s\n", tree_hex);
-    if (commit->has_parent) {
-        hash_to_hex(&commit->parent, parent_hex);
-        n += snprintf(buf + n, sizeof(buf) - n, "parent %s\n", parent_hex);
-    }
-    n += snprintf(buf + n, sizeof(buf) - n,
-                  "author %s %" PRIu64 "\n"
-                  "committer %s %" PRIu64 "\n"
-                  "\n"
-                  "%s",
-                  commit->author, commit->timestamp,
-                  commit->author, commit->timestamp,
-                  commit->message);
+gg
+g
+ggg
+g
 
-    *data_out = malloc(n + 1);
-    if (!*data_out) return -1;
-    memcpy(*data_out, buf, n + 1);
-    *len_out = (size_t)n;
-    return 0;
-}
+g
+g
 
-// Walk commit history from HEAD to the root.
-int commit_walk(commit_walk_fn callback, void *ctx) {
-    ObjectID id;
-    if (head_read(&id) != 0) return -1;
+gg
 
-    while (1) {
-        ObjectType type;
-        void *raw;
-        size_t raw_len;
-        if (object_read(&id, &type, &raw, &raw_len) != 0) return -1;
+g
+g
+g
+g
+g
+g
+g
+g
+g
+g
+g
+g
 
-        Commit c;
-        int rc = commit_parse(raw, raw_len, &c);
-        free(raw);
-        if (rc != 0) return -1;
+gg
+g
+g
+g
 
-        callback(&id, &c, ctx);
-
+g
+g
+g
+g
+g
+g
         if (!c.has_parent) break;
         id = c.parent;
     }
