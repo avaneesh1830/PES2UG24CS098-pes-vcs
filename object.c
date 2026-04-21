@@ -1,4 +1,12 @@
-// object.c — Content-addressable object store
+
+    char tmp_path[560];
+    snprintf(tmp_path, sizeof(tmp_path), "%s/.tmp-%d", shard_dir, getpid());
+
+    int fd = open(tmp_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    if (fd < 0) {
+        free(full);
+        return -1;
+    }// object.c — Content-addressable object store
 //
 // Every piece of data (file contents, directory listings, commits) is stored
 // as an "object" named by its SHA-256 hash. Objects are stored under
