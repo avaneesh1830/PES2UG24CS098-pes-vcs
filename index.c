@@ -1,6 +1,18 @@
 // index.c — Staging area implementation
 //
-// Text format of .pes/index (one entry per line, sorted by path):
+/ Forward declaration (implemented in object.c)
+int object_write(ObjectType type, const void *data, size_t len, ObjectID *id_out);
+
+static int compare_index_entries_by_path(const void *a, const void *b) {
+    const IndexEntry *ea = (const IndexEntry *)a;
+    const IndexEntry *eb = (const IndexEntry *)b;
+    return strcmp(ea->path, eb->path);
+}
+
+            int remaining = index->count - i - 1;
+            if (remaining > 0)
+                memmove(&index->entries[i], &index->entries[i + 1],
+                        remaining * sizeof(IndexEntr// Text format of .pes/index (one entry per line, sorted by path):
 //
 //   <mode-octal> <64-char-hex-hash> <mtime-seconds> <size> <path>
 //
