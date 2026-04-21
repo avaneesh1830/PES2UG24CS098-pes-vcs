@@ -1,18 +1,6 @@
 // index.c — Staging area implementation
 //
-/ Forward declaration (implemented in object.c)
-int object_write(ObjectType type, const void *data, size_t len, ObjectID *id_out);
-
-static int compare_index_entries_by_path(const void *a, const void *b) {
-    const IndexEntry *ea = (const IndexEntry *)a;
-    const IndexEntry *eb = (const IndexEntry *)b;
-    return strcmp(ea->path, eb->path);
-}
-
-            int remaining = index->count - i - 1;
-            if (remaining > 0)
-                memmove(&index->entries[i], &index->entries[i + 1],
-                        remaining * sizeof(IndexEntr// Text format of .pes/index (one entry per line, sorted by path):
+// Text format of .pes/index (one entry per line, sorted by path):
 //
 //   <mode-octal> <64-char-hex-hash> <mtime-seconds> <size> <path>
 //
@@ -47,6 +35,22 @@ static int compare_index_entries_by_path(const void *a, const void *b) {
     return strcmp(ea->path, eb->path);
 }
 
+// ─── PROVIDED ────────────────────────────────────────────────────────────────
+
+// Find an index entry by path (linear scan).
+IndexEntry* index_find(Index *index, const char *path) {
+    for (int i = 0; i < index->count; i++) {
+        if (strcmp(index->entries[i].path, path) == 0)
+            return &index->entries[i];
+    }
+    return NULL;
+}
+
+// Remove a file from the index.
+// Returns 0 on success, -1 if path not in index.
+int index_remove(Index *index, const char *path) {
+    for (int i = 0; i < index->count; i++) {
+        if (strcmp(index->entries[i].path, path) == 0) {
             int remaining = index->count - i - 1;
             if (remaining > 0)
                 memmove(&index->entries[i], &index->entries[i + 1],
@@ -233,20 +237,6 @@ int index_save(const Index *index) {
     if (rename(tmp_path, INDEX_FILE) != 0) {
         unlink(tmp_path);
         free(sorted_entries);
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-V
-v
-v
-git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
-V
-b
-
         return -1;
     }
 
