@@ -233,6 +233,20 @@ int index_save(const Index *index) {
     if (rename(tmp_path, INDEX_FILE) != 0) {
         unlink(tmp_path);
         free(sorted_entries);
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+V
+v
+v
+git add index.c && git commit -m "Phase 3: Implement index_add — blob write and index entry update"
+V
+b
+
         return -1;
     }
 
